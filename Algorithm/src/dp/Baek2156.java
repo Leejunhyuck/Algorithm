@@ -1,16 +1,14 @@
+package dp;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.*;
 
+public class Baek2156 {
 
-public class Main {
-	
-	
-
-public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException {
 		
 		
 		BufferedReader br =new BufferedReader(new InputStreamReader(System.in));
@@ -18,41 +16,34 @@ public static void main(String[] args) throws IOException {
 		
 		
 		int num =Integer.parseInt(br.readLine());
-		int d[] = new int[num+1];
+		int[] a = new int[num+1];
+		int[] d= new int[num+1];
 		
-		for(int i=1;i<=num;i++) {
+		for(int i=1;i<=num;i++)
+		{
+			a[i]=Integer.parseInt(br.readLine());
+		}
+		
+		d[0]=0;
+		d[1]=a[1];
+		if(num>1) d[2]=a[1]+a[2];
 			
-			d[i]=i;
-		
-		
-		
-	
+		for(int i=3;i<=num;i++) {
 			
-			for(int j=2;j*j<=i;j++) {
-				
-				d[i]=Math.min(d[i], d[i-j*j]+1);
-				
-			
-			}
+			d[i]= Math.max(d[i-1],Math.max(d[i-2]+a[i],d[i-3]+a[i-1]+a[i]));
 			
 			
 		}
 		
-		
-			
-			
+		bw.write(d[num]+"\n");
 		
 		
-		bw.write(d[0]+"\n");
+		
 		
 		bw.flush();
 		bw.close();
 		br.close();
 			
 		}
-
-	}
 	
-	
-
-
+}

@@ -1,58 +1,44 @@
+package dp;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.*;
 
+public class Baek2193 {
 
-public class Main {
-	
-	
-
-public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException {
 		
 		
 		BufferedReader br =new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		
+		int num = Integer.parseInt(br.readLine());
+		long dp[][]=new long[num+1][2];
 		
-		int num =Integer.parseInt(br.readLine());
-		int d[] = new int[num+1];
+		dp[1][0]=0;
+		dp[1][1]=1;
 		
-		for(int i=1;i<=num;i++) {
+		for(int i=2;i<=num;i++) {
 			
-			d[i]=i;
-		
-		
-		
-	
-			
-			for(int j=2;j*j<=i;j++) {
-				
-				d[i]=Math.min(d[i], d[i-j*j]+1);
-				
-			
-			}
-			
+			dp[i][0]=dp[i-1][0]+dp[i-1][1];
+			dp[i][1]=dp[i-1][0];
 			
 		}
 		
-		
-			
-			
+		bw.write(dp[num][0]+dp[num][1]+"\n");
 		
 		
-		bw.write(d[0]+"\n");
+		
+		
+		
 		
 		bw.flush();
-		bw.close();
 		br.close();
+		bw.close();
+		
+		
 			
 		}
-
-	}
 	
-	
-
-
+}

@@ -1,15 +1,12 @@
+package dp;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.*;
 
-
-public class Main {
-	
-	
-
+public class Baeck11055 {
 public static void main(String[] args) throws IOException {
 		
 		
@@ -18,41 +15,37 @@ public static void main(String[] args) throws IOException {
 		
 		
 		int num =Integer.parseInt(br.readLine());
-		int d[] = new int[num+1];
 		
-		for(int i=1;i<=num;i++) {
-			
-			d[i]=i;
+		int a[] = new int[num];
+		int d[] = new int[num];
+		int maxdp=0;
 		
-		
-		
-	
-			
-			for(int j=2;j*j<=i;j++) {
+		String str[] =br.readLine().split(" ");
+		for(int i=0;i<num;i++)
+		{
+			a[i]=Integer.parseInt(str[i]);
+			d[0]=a[0];
+			int max=0;
+			for(int j=0;j<i;j++) {
+				if(a[j]<a[i]) {
+					if(max<d[j])
+						max=d[j];
+				}
 				
-				d[i]=Math.min(d[i], d[i-j*j]+1);
 				
-			
 			}
+			d[i]=max+a[i];
 			
+			if(maxdp<d[i])
+				maxdp=d[i];
 			
 		}
 		
-		
-			
-			
-		
-		
-		bw.write(d[0]+"\n");
+		bw.write(maxdp+"\n");
 		
 		bw.flush();
 		bw.close();
 		br.close();
 			
 		}
-
-	}
-	
-	
-
-
+}
