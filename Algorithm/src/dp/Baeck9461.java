@@ -1,14 +1,12 @@
+package dp;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.*;
 
-
-public class Main {
-	
-	
+public class Baeck9461 {
 
 public static void main(String[] args) throws IOException {
 		
@@ -16,31 +14,30 @@ public static void main(String[] args) throws IOException {
 		BufferedReader br =new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		
-		int n = Integer.parseInt(br.readLine());
-		int a[] = new int[n+1];
-		int d[] = new int[n+1];
+		
+		int n =Integer.parseInt(br.readLine());
 		
 		
-		StringTokenizer str = new StringTokenizer(br.readLine());
-		for(int i=1;i<=n;i++) {
-			
-			a[i] = Integer.parseInt(str.nextToken());
-			
-		}
+		for(int i=0;i<n;i++) {
+			int m =Integer.parseInt(br.readLine());
+			long[] d = new long[101];
 		
-		d[0]=0;
-		a[0]=0;
-		
-		for(int i=1;i<=n;i++) {
-			
-			for(int j=1;j<=i;j++) {
-				d[i]=Math.max(d[i], d[i-j]+a[j]);
-			}
+		d[1]=1;
+		d[2]=1;
+		d[3]=1;
+		d[4]=2;
+		d[5]=2;
+		for(int j=6;j<=m;j++) {
+			d[j]= d[j-1]+d[j-5];
 			
 		}
 		
+			
 		
-		bw.write(d[n]+"\n");
+		
+		bw.write(d[m]+"\n");
+		
+		}
 		
 		
 		
@@ -57,8 +54,5 @@ public static void main(String[] args) throws IOException {
 			
 		}
 
-	}
 	
-	
-
-
+}
