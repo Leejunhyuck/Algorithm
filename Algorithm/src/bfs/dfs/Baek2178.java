@@ -1,13 +1,15 @@
+package bfs.dfs;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.StringTokenizer;
 
-
-public class Main {
-	
+public class Baek2178 {
 	static int[] dirx= { 0, 0,  -1, 1};
 	static int[] diry= { -1, 1, 0, 0 };
 	static int[][] map;
@@ -88,15 +90,15 @@ public static void main(String[] args) throws IOException {
 
 public static void bfs() {
 	
-	Queue<Node> que = new LinkedList<Node>() ;
+	Queue<Node4> que = new LinkedList<Node4>() ;
 	
 	
-	que.add(new Node(0,0,1));
+	que.add(new Node4(0,0,1));
 	
 	
 	while(!que.isEmpty()) {
 		
-		Node node = que.poll();
+		Node4 node = que.poll();
 		int row = node.row;
 		int col = node.col;
 		int cnt = node.cnt;
@@ -115,7 +117,7 @@ public static void bfs() {
 			if(isBoundary(nr, nc)&&map[nr][nc]!=0&&!visited[nr][nc]) {
 				visited[nr][nc] =true;
 				
-				que.add(new Node(nr,nc,cnt+1));
+				que.add(new Node4(nr,nc,cnt+1));
 				
 			}
 		
@@ -132,12 +134,12 @@ public static void bfs() {
 
 }
 
-class Node {
+class Node4 {
 	
 	int row;
 	int col;
 	int cnt;
-	Node(int row,int col,int cnt){
+	Node4(int row,int col,int cnt){
 		
 		this.row =row;
 		this.col = col;
@@ -168,18 +170,3 @@ class Node {
 //		
 //	}	
 //		
-		
-	
-
-
-
-		
-
-
-	
-
-	
-
-	
-
-

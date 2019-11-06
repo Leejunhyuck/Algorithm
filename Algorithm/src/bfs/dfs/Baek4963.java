@@ -1,3 +1,5 @@
+package bfs.dfs;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -6,13 +8,13 @@ import java.io.OutputStreamWriter;
 import java.util.*;
 
 
-public class Main {
+public class Baek4963 {
 	
-	static int[] dirx= { 0, 0,  -1, 1};
-	static int[] diry= { -1, 1, 0, 0 };
+	static int[] dirx= { 0, 0, 1, -1, 1, -1, 1, -1 };
+	static int[] diry= { -1, 1, 0, 0, -1, 1, 1, -1 };
 	static int[][] map;
 	static boolean[][] visited;
-	static int n,m,apart=0;
+	static int n,m,apart=1;
 public static void main(String[] args) throws IOException {
 		
 		
@@ -21,31 +23,38 @@ public static void main(String[] args) throws IOException {
 		
 		
 		
-		
+		while(true) {
 	
 			StringTokenizer st = new StringTokenizer(br.readLine());
 			n= Integer.parseInt(st.nextToken());
 			m= Integer.parseInt(st.nextToken());
 			
+			if(m==0&&n==0) {
+				break;
+			}
 			
-			
-			
-			
-			
-		map = new int[n][m];
-		visited = new boolean[n][m];
+		map = new int[m][n];
+		visited = new boolean[m][n];
 		
-		for(int i=0;i<n;i++) {
-			String str = br.readLine();
-			for(int j=0;j<m;j++) {
-				map[i][j]=Integer.parseInt(str.charAt(j)+"");
+		for(int i=0;i<m;i++) {
+			StringTokenizer str = new StringTokenizer(br.readLine());
+			for(int j=0;j<n;j++) {
+				map[i][j]=Integer.parseInt(str.nextToken());
 			}
 			
 		}
-
 		
 
-		bfs();
+		for(int i=0;i<m;i++) {
+		
+			for(int j=0;j<n;j++) {
+				if(map[i][j]!=0 && !visited[i][j]) {
+					bfs(i,j);
+					apart += 1;
+				}
+			}
+			
+		}
 //		int[] ans = new int[apart-1];
 //		
 //		
@@ -63,14 +72,15 @@ public static void main(String[] args) throws IOException {
 		
 		
 //		Arrays.sort(ans);
-		
-		
+		bw.write(apart-1+"\n");
+		apart =1;
+		}
 //		for (int i : ans) {
 //			bw.write(i+"\n");
 //		}
 		
 		
-		bw.write(apart+"\n");
+		
 	
 		
 		
@@ -86,47 +96,39 @@ public static void main(String[] args) throws IOException {
 
 
 
-public static void bfs() {
+public static void bfs(int startRow,int startCol) {
 	
 	Queue<Node> que = new LinkedList<Node>() ;
-	
-	
-	que.add(new Node(0,0,1));
-	
+	visited[startRow][startCol] =true;
+	map[startRow][startCol]=apart;
+	que.add(new Node(startRow,startCol));
 	
 	while(!que.isEmpty()) {
 		
 		Node node = que.poll();
 		int row = node.row;
 		int col = node.col;
-		int cnt = node.cnt;
 		
-		if(row ==n-1 && col == m-1) {
-			apart =cnt;
-			return;
-		}
-		for(int k=0;k<4;k++) {
-			int nr= row+dirx[k];
-			int nc= col+diry[k];
+		for(int i=0;i<8;i++) {
+			int nr= row+dirx[i];
+			int nc= col+diry[i];
 			
 			
-		
-			
-			if(isBoundary(nr, nc)&&map[nr][nc]!=0&&!visited[nr][nc]) {
-				visited[nr][nc] =true;
-				
-				que.add(new Node(nr,nc,cnt+1));
+			if(isBoundary(nr, nc) && !visited[nr][nc] && map[nr][nc]!=0) {
+				visited[nr][nc]=true;
+				map[nr][nc]=apart;
+				que.add(new Node(nr,nc));
 				
 			}
-		
+		}	
 		
 		
 	}
-	}
+	
 }
 	public static boolean isBoundary (int row, int col) {
 		
-		return (row>=0 && row<n)&&(col>=0 && col<m);
+		return (row>=0 && row<m)&&(col>=0 && col<n);
 	}
 
 
@@ -136,12 +138,11 @@ class Node {
 	
 	int row;
 	int col;
-	int cnt;
-	Node(int row,int col,int cnt){
+	
+	Node(int row,int col){
 		
 		this.row =row;
 		this.col = col;
-		this.cnt = cnt;
 	}
 	
 }
