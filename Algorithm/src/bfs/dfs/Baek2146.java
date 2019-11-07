@@ -1,20 +1,23 @@
+package bfs.dfs;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.StringTokenizer;
 
-
-public class Main {
-	
+public class Baek2146 {
 	static int[] dirx= { 0, 0,  -1, 1};
 	static int[] diry= { -1, 1, 0, 0 };
 	static int[][] map;
 	static boolean[][] visited;
 	static int[][] bridge;
 	static int n,m,apart=0;
-	static Queue<Node> q = new LinkedList<Node>() ;
+	static Queue<Node6> q = new LinkedList<Node6>() ;
 	static ArrayList<Integer> list = new ArrayList<>();
 
 public static void main(String[] args) throws IOException {
@@ -61,7 +64,7 @@ public static void main(String[] args) throws IOException {
 			
 			for(int j=0;j<m;j++) {
 				if(map[i][j]!=0)
-					q.add(new Node(i,j));
+					q.add(new Node6(i,j));
 			}
 			
 		}
@@ -106,15 +109,15 @@ public static void main(String[] args) throws IOException {
 
 public static void bfs(int i,int j,int cnt) {
 	
-	Queue<Node> que = new LinkedList<Node>() ;
+	Queue<Node6> que = new LinkedList<Node6>() ;
 	
 	map[i][j]=cnt;
-	que.add(new Node(i,j));
+	que.add(new Node6(i,j));
 	visited[i][j] =true;
 	
 	while(!que.isEmpty()) {
 		
-		Node node = que.poll();
+		Node6 node = que.poll();
 		int row = node.row;
 		int col = node.col;
 		
@@ -130,7 +133,7 @@ public static void bfs(int i,int j,int cnt) {
 			if(isBoundary(nr, nc)&&map[nr][nc]==1&&!visited[nr][nc]) {
 				visited[nr][nc] =true;
 				map[nr][nc]=cnt;
-				que.add(new Node(nr,nc));
+				que.add(new Node6(nr,nc));
 				
 			}
 		
@@ -152,7 +155,7 @@ public static void bfs2() {
 	while(!q.isEmpty()) {
 		
 		
-		Node node = q.poll();
+		Node6 node = q.poll();
 		int row = node.row;
 		int col = node.col;
 		
@@ -169,7 +172,7 @@ public static void bfs2() {
 			
 			if(map[nr][nc]==0) {
 				
-				q.add(new Node(nr,nc));
+				q.add(new Node6(nr,nc));
 				map[nr][nc]=map[row][col];
 				bridge[nr][nc]=bridge[row][col]+1;
 				
@@ -198,12 +201,12 @@ public static void bfs2() {
 
 }
 
-class Node {
+class Node6 {
 	
 	int row;
 	int col;
 	int cnt;
-	Node(int row,int col){
+	Node6(int row,int col){
 		
 		this.row =row;
 		this.col = col;
@@ -235,17 +238,6 @@ class Node {
 //	}	
 //		
 		
-	
-
-
-
-		
-
-
-	
-
-	
-
 	
 
 
