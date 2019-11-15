@@ -8,7 +8,9 @@ import java.io.OutputStreamWriter;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class Baek11651 {
+public class Baek11650 {
+
+	
 
 public static void main(String[] args) throws IOException {
 		
@@ -17,12 +19,12 @@ public static void main(String[] args) throws IOException {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		
 		int n = Integer.parseInt(br.readLine());
-		Point2 a[] = new Point2[n];
+		Point a[] = new Point[n];
 		
 		for(int i=0;i<n;i++) {
 			StringTokenizer str = new StringTokenizer(br.readLine());
 			
-			a[i]=new Point2(Integer.parseInt(str.nextToken()),Integer.parseInt(str.nextToken()));
+			a[i]=new Point(Integer.parseInt(str.nextToken()),Integer.parseInt(str.nextToken()));
 			
 			
 			
@@ -50,11 +52,11 @@ public static void main(String[] args) throws IOException {
 }
 		
 		
-class Point2 implements Comparable<Point2> {
+class Point implements Comparable<Point> {
 	
 	int x;
 	int y;
-	Point2(int x,int y){
+	Point(int x,int y){
 		this.x=x;
 		this.y=y;
 		
@@ -62,7 +64,7 @@ class Point2 implements Comparable<Point2> {
 	
 	
 	@Override
-	public int compareTo(Point2 o) {
+	public int compareTo(Point o) {
 		
 		if(this.x==o.x)
 			return this.y- o.y;
